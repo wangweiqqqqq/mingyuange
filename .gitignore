@@ -1,0 +1,26 @@
+# 环境
+.venv/
+__pycache__/
+*.pyc
+
+# 日志与临时
+*.log
+.pytest_cache/
+*.bak-*
+
+# 运行状态
+alerts_state.json
+
+# 敏感物：加密密钥文件、本地邮箱配置绝不入库（仓库是公开的）
+.mail_secret.dpapi
+*.dpapi
+.env
+mail_config.json
+deploy/github-actions/repo/mail_config.json
+
+# 机器人临时工作区归档
+archive/
+
+# 系统杂物
+Thumbs.db
+desktop.ini
