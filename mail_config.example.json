@@ -1,0 +1,7 @@
+{
+  "host": "smtp.qq.com",
+  "port": 465,
+  "user": "your-account@qq.com",
+  "to": ["your-account@qq.com"],
+  "subject_prefix": "Mingyuan"
+}
