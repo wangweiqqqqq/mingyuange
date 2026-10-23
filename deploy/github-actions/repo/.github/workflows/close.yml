@@ -1,0 +1,41 @@
+name: 明远阁 · 收盘总结
+
+on:
+  schedule:
+    # 北京时间 15:05（UTC 07:05），周一到周五
+    - cron: '5 7 * * 1-5'
+  workflow_dispatch:
+
+jobs:
+  close:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      MY_BASE: ${{ github.workspace }}
+      DSH_SECRET_MAIL_PASS: ${{ secrets.MAIL_PASS }}
+      TZ: Asia/Shanghai
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 安装依赖
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: 生成收盘总结
+        run: python tools/daily_report.py
+
+      - name: 发送邮件
+        run: python tools/mail_report.py --subject "明远阁 | 收盘总结 $(date +%F)"
+
+      - name: 回写报告与历史到仓库
+        run: |
+          git config user.name "mingyuan-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add reports history || true
+          git commit -m "close $(date +%F)" || echo "no changes"
+          git push || echo "push skipped"
