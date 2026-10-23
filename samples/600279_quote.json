@@ -1,0 +1,1 @@
+﻿{"ok": false, "kind": "quote", "error": {"type": "network", "message": "em: ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"}}
