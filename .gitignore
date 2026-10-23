@@ -16,6 +16,7 @@ alerts_state.json
 *.dpapi
 .env
 mail_config.json
+cloud/mail_config.json
 deploy/github-actions/repo/mail_config.json
 
 # 机器人临时工作区归档
